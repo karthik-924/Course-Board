@@ -60,6 +60,11 @@ const Course = () => {
                 <p>:</p>
                 <p className='text-base'>{courseDetails?.duration}</p>
               </div>
+              {courseDetails?.likes && <div className='w-full flex gap-2'>
+                <p className='text-base font-bold'>Likes</p>
+                <p>:</p>
+                <p className='text-base'>{courseDetails?.likes}</p>
+              </div>}
             </div>
             <div className='flex gap-2'>
               <FaLocationDot size={20} />
