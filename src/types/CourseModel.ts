@@ -21,4 +21,4 @@ type CourseModel = {
     }[];
   };
 
-    export default CourseModel;
+export default CourseModel;

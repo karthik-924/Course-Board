@@ -2,9 +2,9 @@ import firebaseconfig from "./connection";
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, doc, getDocs, setDoc } from 'firebase/firestore/lite';
 import courseModels from "./CourseModels";
-import CourseModel from "../types/CourseModel";
+import { v4 as uuidv4 } from 'uuid';
 
-console.log(firebaseconfig);
+// console.log(firebaseconfig);
 const app = initializeApp(firebaseconfig);
 const db = getFirestore(app);
 
@@ -33,9 +33,13 @@ const getStudentDetails = async (id: string) => {
 
 const addCourses = async () => {
     courseModels.forEach(async (course) => {
-        const coursesRef = collection(db, 'courses'); // Collection reference
-        const newCourseRef = doc(coursesRef); // Create a new document reference
-        await setDoc(newCourseRef, course);
+        try {
+            const courseId = uuidv4();
+            const coursesRef = collection(db, 'courses');
+            await setDoc(doc(coursesRef, courseId), { ...course, id: courseId });
+        } catch (error) {
+            console.error("Error adding course: ", error);
+        }
     });
 }
 
