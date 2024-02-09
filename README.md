@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+# Project README
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web application designed to manage courses and provide a student dashboard. It offers functionalities such as viewing course details, enrolling in courses, and marking courses as complete. Below is detailed information about the application's routes, folder structure, and instructions on how to run it locally.
 
-Currently, two official plugins are available:
+## Routes
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **/courses**: This route displays a comprehensive list of all available courses retrieved from the Firebase database. Users can browse through various courses and select ones they're interested in.
+- **/course/:id**: By navigating to this route and providing a specific course ID, users can access detailed information about the selected course. This includes the course's name, instructor, description, schedule, and other relevant details.
+- **/dashboard/:id**: The student dashboard route provides enrolled students with an overview of their courses. It displays information about the courses they are currently enrolled in, including the course name, instructor, due date, and progress. Additionally, students can mark courses as complete from this dashboard, which updates their progress in the Firebase database.
 
-## Expanding the ESLint configuration
+## Folder Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **src/app**: This directory contains configurations for the Redux store, including reducers and actions. It helps manage the application's state, though currently not extensively used.
+- **src/assets**: All images and logos used within the application are stored here. This ensures easy access and management of resources.
+- **src/components**: This directory houses reusable components used across various pages of the application. Components are organized based on their functionality and usage for improved maintainability.
+- **src/pages**: Defines the routes and associated components/pages of the application. Each page corresponds to a specific route and contains relevant content and functionality.
+- **src/queries**: Firebase queries and dummy data utilized during development are stored here. These queries interact with the Firebase database to retrieve and update course information.
+- **src/types**: TypeScript type definitions, especially the structure of courses, are defined in this directory. It ensures consistency and type safety throughout the application.
 
-- Configure the top-level `parserOptions` property like this:
+## Instructions to Run Locally
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+1. Clone the repository to your local machine.
+2. Run `npm install` to install project dependencies listed in the `package.json` file.
+3. Create an `.env` file in the root directory and provide your Firebase configuration details, including the API key and other necessary credentials.
+4. Uncomment the `useEffect` function located in `src/queries/Queries.ts` to populate the Firebase database with dummy data for testing purposes.
+5. After pushing data to Firebase, execute the command `npm run dev` to start the development server.
+6. Open a web browser and navigate to the following routes to explore the application:
+   - `/courses`: Browse through the available courses.
+   - `/course/:id`: View detailed information about a specific course by providing its ID in the URL.
+   - `/dashboard/:id`: Access the student dashboard to view enrolled courses and mark them as complete.
+7. Any likes added to courses on the backend will reflect in the frontend upon page reload.
+8. The "Mark as Complete" feature allows students to update their course progress, which is reflected in the Firebase database.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
