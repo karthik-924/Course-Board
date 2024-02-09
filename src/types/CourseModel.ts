@@ -18,7 +18,9 @@ type CourseModel = {
       id: number;
       name: string;
       email: string;
-    }[];
+  }[];
+  complete?: boolean;
+    likes?: number;
   };
 
 export default CourseModel;

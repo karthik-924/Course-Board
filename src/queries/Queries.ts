@@ -15,6 +15,18 @@ const getCourses = async () => {
     return courseList;
 }
 
+const updateCourse = async (courseId: string, completeValue: boolean) => {
+    const docRef = doc(db, 'courses', courseId);
+    try {
+        await setDoc(docRef, { complete: completeValue }, { merge: true });
+        console.log("Complete field updated successfully!");
+    } catch (error) {
+        console.error("Error updating complete field: ", error);
+    }
+}
+
+    
+
 const getCourse = async (id: string) => {
     const courseCol = collection(db, 'courses');
     const courseSnapshot = await getDocs(courseCol);
@@ -24,11 +36,15 @@ const getCourse = async (id: string) => {
 }
 
 const getStudentDetails = async (id: string) => {
-    const studentCol = collection(db, 'students');
-    const studentSnapshot = await getDocs(studentCol);
-    const studentList = studentSnapshot.docs.map(doc => doc.data());
-    const student = studentList.find(student => student.id === id);
-    return student;
+    console.log(id);
+    const courseCol = collection(db, 'courses');
+    const courseSnapshot = await getDocs(courseCol);
+    const courseList = courseSnapshot.docs.map(doc => doc.data());
+    const studentCourses = courseList.filter(course =>
+        course.students.some((student: { id: number; }) => student.id === parseInt(id))
+      );
+    console.log(studentCourses);
+    return studentCourses;
 }
 
 const addCourses = async () => {
@@ -43,4 +59,4 @@ const addCourses = async () => {
     });
 }
 
-export { getCourses, getCourse, getStudentDetails, addCourses };
+export { getCourses, getCourse, getStudentDetails, addCourses,updateCourse };

@@ -30,25 +30,25 @@ const Course = () => {
     <>
       {loading ? <Loading /> :
         <div className={`w-[100vw] min-h-[100vh] bg-slate-200 flex flex-col gap-10 justify-center items-center`} >
-          <div className='w-3/4 justify-between flex items-center'>
-            <div className='w-3/4 flex gap-10'>
+          <div className='w-3/4 max-sm:w-[95%] justify-between flex items-center'>
+            <div className='w-5/6 max-sm:mt-10 flex gap-10'>
               <img src={courseDetails?.thumbnail} className='w-20 h-20' />
               <div className='flex flex-col gap-5'>
                 <p className='text-xl font-bold'>{courseDetails?.name}</p>
                 <p className='text-lg'>{courseDetails?.instructor}</p>
               </div>
             </div>
-            <div className='flex'>
+            <div className='flex w-1/6 mr-3'>
               <p className={` text-base font-bold ${courseDetails?.enrollmentStatus === 'Open' ? "text-green-500" : courseDetails?.enrollmentStatus === 'In Progress' ? "text-yellow-400" : "text-red-600"}`}>{courseDetails?.enrollmentStatus}</p>
             </div>
           </div>
-          <div className='w-3/4 justify-between flex items-center'>
+          <div className='w-3/4 max-sm:w-[95%] justify-between flex items-center'>
             <p className='text-lg w-3/4'>{courseDetails?.description}</p>
             <div className='flex w-fit'>
               <p className='text-sm font-bold'>{courseDetails?.duration}</p>
             </div>
           </div>
-          <div className='w-3/4 justify-between flex items-center'>
+          <div className='w-3/4 max-sm:w-[90%] justify-between flex items-center'>
             <div className='w-3/4 flex flex-col gap-10'>
               <div className='w-full flex gap-2'>
                 <p className='text-base font-bold'>Schedule</p>
@@ -66,7 +66,7 @@ const Course = () => {
               <p className='text-base font-bold'>{courseDetails?.location}</p>
             </div>
           </div>
-          <div className='w-3/4 flex gap-2'>
+          <div className='w-3/4 max-sm:w-[95%] flex gap-2'>
             <p className='text-base font-bold'>Prerequisites</p>
             <p>:</p>
             <div className='flex-col flex gap-3'>
@@ -75,7 +75,7 @@ const Course = () => {
               ))}
             </div>
           </div>
-          <div className='w-3/4 flex flex-col justify-center items-center gap-5'>
+          <div className='w-3/4 max-sm:w-[95%] flex flex-col justify-center items-center gap-5'>
             <p className='text-lg font-bold'>Syllabus</p>
             <Syllabus syllabus={courseDetails?.syllabus as { week: number; topic: string; content: string; }[]} />
           </div>
